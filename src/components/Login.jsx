@@ -1,13 +1,12 @@
 import { useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, loginWithEmailAndPassword } from "../auth/firebase";
 import { Button } from "react-bootstrap";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
+import { auth, loginWithEmailAndPassword } from "../auth/firebase";
 
-const Login = () => {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
 
@@ -17,7 +16,7 @@ const Login = () => {
 
   return (
     <div>
-      <div> Hello {user?.email}</div>
+      <div>Hello {user?.email}</div>
       <input
         type="email"
         value={email}
@@ -36,5 +35,4 @@ const Login = () => {
       </Button>
     </div>
   );
-};
-export default Login;
+}

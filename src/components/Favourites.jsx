@@ -1,8 +1,11 @@
+import { useEffect, useState } from "react";
+import { Button, Col, Container, Form, Row, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { initializeCountries } from "../services/countriesServices";
-import { Button, Col, Container, Row } from "react-bootstrap";
-import { Form } from "react-router-dom";
-import { clearFavourites } from "../store/favouritesSlice";
+import {
+  clearFavourites,
+  getFavouritesFromSource,
+} from "../store/favouritesSlice";
 import CountrySingle from "./CountrySingle";
 
 // Favourites to be written
@@ -14,7 +17,10 @@ const Favourites = () => {
   const favouritesList = useSelector((state) => state.favourites.favourites);
   const favouritesLoading = useSelector((state) => state.favourites.isLoading);
 
-  if (favouritesList !== null) {
+  console.log("favouritesList: ", favouritesList);
+  console.log("countriesList inside favourites: ", countriesList);
+
+  if (Array.isArray(favouritesList) && favouritesList.length > 0) {
     countriesList = countriesList.filter((country) =>
       favouritesList.includes(country.name.common)
     );
@@ -24,6 +30,7 @@ const Favourites = () => {
 
   useEffect(() => {
     dispatch(initializeCountries());
+    dispatch(getFavouritesFromSource());
   }, [dispatch]);
 
   if (countriesLoading || favouritesLoading) {
@@ -44,7 +51,7 @@ const Favourites = () => {
   return (
     <Container fluid>
       <Row>
-        <Col>
+        <Col className="mt-5 d-flex justify-content-center">
           <Form>
             <Form.Control
               style={{ width: "18rem" }}
@@ -69,9 +76,9 @@ const Favourites = () => {
               .toLowerCase()
               .includes(search.toLowerCase());
           })
-          .map((country) => {
-            <CountrySingle key={country.name.common} country={country} />;
-          })}
+          .map((country) => (
+            <CountrySingle key={country.name.common} country={country} />
+          ))}
       </Row>
     </Container>
   );

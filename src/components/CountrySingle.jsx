@@ -1,7 +1,16 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Button, Col, Container, Image, Row, Spinner } from "react-bootstrap";
+import { Button, Col, Image, Spinner } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
+import {
+  MDBCard,
+  MDBCardImage,
+  MDBCardBody,
+  MDBCardTitle,
+  MDBCardText,
+  MDBRow,
+  MDBCol,
+} from "mdb-react-ui-kit";
 
 const CountrySingle = (props) => {
   const location = useLocation();
@@ -14,9 +23,7 @@ const CountrySingle = (props) => {
   useEffect(() => {
     axios
       .get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${
-          country.capital
-        }&units=metric&appid=${import.meta.env.VITE_WEATHER_API_KEY}`
+        `https://api.openweathermap.org/data/2.5/weather?q=${country.capital}&units=metric&appid=d6396cefb7fda507e8e0c956cbab71cf` //${import.meta.env.VITE_WEATHER_API_KEY}
       )
       .catch((error) => {
         console.log(error);
@@ -45,33 +52,41 @@ const CountrySingle = (props) => {
   }
 
   return (
-    <Container fluid>
-      <Row>
-        <Col className="mt-5 d-flex justify-content-center">
-          <Image src={country.flags.svg} />
-        </Col>
-        <Col>
-          <h2>{country.name.common}</h2>
-          <h3>{country.capital}</h3>
+    <MDBCol>
+      <MDBCard className="h-100" style={{ maxWidth: "350px" }}>
+        <MDBCardImage
+          src={country.flags.svg}
+          alt="Country flag"
+          position="top"
+          style={{ objectFit: "cover", width: "100%", height: "100%" }} // Smaller image height
+        />
+        <MDBCardBody>
+          <MDBCardTitle style={{ fontSize: "1.2rem" }}>
+            {country.name.common}, {country.capital}
+          </MDBCardTitle>
 
-          <div>
-            <p>
-              Right now it is <strong>{parseInt(weather.main.temp)} </strong>
-              degrees in {country.capital} and {weather.weather[0].description}
-            </p>
+          <MDBCardText style={{ fontSize: "0.9rem" }}>
+            Right now it is <strong>{parseInt(weather.main.temp)}°C</strong> in{" "}
+            {country.capital} and {weather.weather[0].description}
+          </MDBCardText>
+
+          <div className="d-flex align-items-center">
             <Image
               src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
+              style={{ width: "40px", height: "40px", marginRight: "10px" }} // Smaller image size
             />
+            <Button
+              variant="light"
+              onClick={() => navigate("/countries")}
+              size="sm" // Smaller button
+            >
+              Back to Countries
+            </Button>
           </div>
-          <Button variant="light" onClick={() => navigate("/countries")}>
-            Back to Countries
-          </Button>
-        </Col>
-      </Row>
-    </Container>
+        </MDBCardBody>
+      </MDBCard>
+    </MDBCol>
   );
-
-  // Cases we will cover together are: Country capital image
 };
 
 export default CountrySingle;

@@ -6,7 +6,7 @@ import {
   clearFavourites,
   getFavouritesFromSource,
 } from "../store/favouritesSlice";
-import CountrySingle from "./CountrySingle";
+import CountryCard from "./CountryCard";
 
 // Favourites to be written
 const Favourites = () => {
@@ -51,7 +51,7 @@ const Favourites = () => {
   return (
     <Container fluid>
       <Row>
-        <Col className="mt-5 d-flex justify-content-center">
+        <Col className="m-5 d-flex justify-content-center">
           <Form>
             <Form.Control
               style={{ width: "18rem" }}
@@ -62,14 +62,12 @@ const Favourites = () => {
               onChange={(e) => setSearch(e.target.value)}
             />
           </Form>
+          <Button onClick={() => dispatch(clearFavourites())}>
+            Clear Favourites
+          </Button>
         </Col>
       </Row>
-      <Row xs={2} md={3} lg={4} className="g-3">
-        <Button onClick={() => dispatch(clearFavourites())}>
-          Clear Favourites
-        </Button>
-      </Row>
-      <Row xs={2} md={3} lg={4} className="g-3">
+      <Row xs={1} sm={2} md={3} lg={4} className="g-4">
         {countriesList
           .filter((country) => {
             return country.name.official
@@ -77,7 +75,11 @@ const Favourites = () => {
               .includes(search.toLowerCase());
           })
           .map((country) => (
-            <CountrySingle key={country.name.common} country={country} />
+            <CountryCard
+              key={country.name.common}
+              country={country}
+              weather={country.weather}
+            />
           ))}
       </Row>
     </Container>

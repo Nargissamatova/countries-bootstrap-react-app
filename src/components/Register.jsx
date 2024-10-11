@@ -2,9 +2,21 @@ import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, registerWithEmailAndPassword } from "../auth/firebase";
 import { useNavigate } from "react-router-dom";
-import { Button } from "react-bootstrap";
 
-const Register = () => {
+import {
+  MDBBtn,
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBCard,
+  MDBCardBody,
+  MDBCardImage,
+  MDBInput,
+  MDBIcon,
+  MDBCheckbox,
+} from "mdb-react-ui-kit";
+
+export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -20,32 +32,90 @@ const Register = () => {
     }
     registerWithEmailAndPassword(name, email, password);
   };
-
-  // TODO; Add a check to see if user is logged in and navigate to countries if logged in
-
   return (
-    <div>
-      <input
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Full Name"
-      />
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-      />
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-      />
-      <Button onClick={handleRegister}>Register</Button>
-    </div>
-  );
-};
+    <MDBContainer fluid>
+      <MDBCard className="text-black m-5" style={{ borderRadius: "25px" }}>
+        <MDBCardBody>
+          <MDBRow>
+            <MDBCol
+              md="10"
+              lg="6"
+              className="order-2 order-lg-1 d-flex flex-column align-items-center"
+            >
+              <p classNAme="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+                Sign up
+              </p>
 
-export default Register;
+              <div className="d-flex flex-row align-items-center mb-4 ">
+                <MDBIcon fas icon="user me-3" size="lg" />
+                <MDBInput
+                  label="Your Name"
+                  id="form1"
+                  type="text"
+                  className="w-100"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+
+              <div className="d-flex flex-row align-items-center mb-4">
+                <MDBIcon fas icon="envelope me-3" size="lg" />
+                <MDBInput
+                  label="Your Email"
+                  id="form2"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+
+              <div className="d-flex flex-row align-items-center mb-4">
+                <MDBIcon fas icon="lock me-3" size="lg" />
+                <MDBInput
+                  label="Password"
+                  id="form3"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+
+              <div className="d-flex flex-row align-items-center mb-4">
+                <MDBIcon fas icon="key me-3" size="lg" />
+                <MDBInput
+                  label="Repeat your password"
+                  id="form4"
+                  type="password"
+                />
+              </div>
+
+              <div className="mb-4">
+                <MDBCheckbox
+                  name="flexCheck"
+                  value=""
+                  id="flexCheckDefault"
+                  label="Subscribe to our newsletter"
+                />
+              </div>
+
+              <MDBBtn className="mb-4" size="lg" onClick={handleRegister}>
+                Register
+              </MDBBtn>
+            </MDBCol>
+
+            <MDBCol
+              md="10"
+              lg="6"
+              className="order-1 order-lg-2 d-flex align-items-center"
+            >
+              <MDBCardImage
+                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                fluid
+              />
+            </MDBCol>
+          </MDBRow>
+        </MDBCardBody>
+      </MDBCard>
+    </MDBContainer>
+  );
+}

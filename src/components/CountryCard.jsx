@@ -1,4 +1,4 @@
-import { Button, Card, Col, ListGroup } from "react-bootstrap";
+import { Button, Card, Col, ListGroup, Row } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { addFavourite, removeFavourite } from "../store/favouritesSlice";
@@ -8,7 +8,7 @@ const CountryCard = ({ country }) => {
 
   return (
     <div>
-      <Col className="mt-5" key={country.name.official}>
+      <Col key={country.name.official}>
         <Card className="h-100">
           <Link
             to={`/countries/${country.name.common}`}
@@ -55,18 +55,22 @@ const CountryCard = ({ country }) => {
                 </i>
               </ListGroup.Item>
             </ListGroup>
-            <Button
-              variant="primary"
-              onClick={() => dispatch(addFavourite(country.name.common))}
-            >
-              Add Favourite
-            </Button>
-            <Button
-              variant="warning"
-              onClick={() => dispatch(removeFavourite(country.name.common))}
-            >
-              Remove Favourite
-            </Button>
+            <Row xs={2}>
+              <Button
+                size="sm"
+                variant="success"
+                onClick={() => dispatch(addFavourite(country.name.common))}
+              >
+                Add Favourite
+              </Button>
+              <Button
+                size="sm"
+                variant="secondary"
+                onClick={() => dispatch(removeFavourite(country.name.common))}
+              >
+                Remove Favourite
+              </Button>
+            </Row>
           </Card.Body>
         </Card>
       </Col>

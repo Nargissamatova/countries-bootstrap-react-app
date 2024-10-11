@@ -13,10 +13,15 @@ const Layout = () => {
   return (
     <Container fluid>
       <Row>
-        <Navbar bg="light" variant="light">
+        <Navbar bg="dark" variant="dark">
           <Container className="justify-content-end">
+            <Navbar.Brand href="#home">CountriesApp</Navbar.Brand>
+
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
+            <Navbar.Collapse
+              id="basic-navbar-nav"
+              className="justify-content-end"
+            >
               <Nav>
                 <LinkContainer to="/">
                   <Nav.Link>Home</Nav.Link>
@@ -34,7 +39,11 @@ const Layout = () => {
                   <Nav.Link>Login</Nav.Link>
                 </LinkContainer>
                 {user && <Button onClick={logout}>Logout</Button>}
-                <div>{user && `Hello ${user?.email}`}</div>
+                {/*
+                  <div className="align-items-center">
+                    {user && `Hello ${user?.email}`}
+                  </div>
+                */}
               </Nav>
             </Navbar.Collapse>
           </Container>

@@ -39,8 +39,6 @@ export default function Login() {
                 Please enter your login and password!
               </p>
 
-              <div>Hello {user?.email}</div>
-
               <MDBInput
                 wrapperClass="mb-4 w-100"
                 label="Email address"

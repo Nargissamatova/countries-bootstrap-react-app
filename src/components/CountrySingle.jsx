@@ -17,6 +17,7 @@ const CountrySingle = (props) => {
   const country = props.country || location.state.country;
   const [weather, setWeather] = useState("");
   const [isWeatherLoading, setIsWeatherLoading] = useState(true);
+  const [wikiText, setWikiText] = useState("");
 
   const navigate = useNavigate();
 
@@ -32,6 +33,23 @@ const CountrySingle = (props) => {
         setWeather(response.data);
         setIsWeatherLoading(false);
       });
+
+    const getWikiText = async () => {
+      try {
+        const res = await fetch(
+          `https://en.wikipedia.org/api/rest_v1/page/summary/${country.name.common}`
+        );
+
+        if (!res.ok) throw new Error("Could not fetch Wikipedia data!");
+
+        const data = await res.json();
+
+        setWikiText(data.extract);
+      } catch (error) {
+        console.error("Error fetching Wikipedia data: ", error);
+      }
+    };
+    getWikiText();
   }, [country.capital]);
 
   console.log("Weather: ", weather);
@@ -53,7 +71,7 @@ const CountrySingle = (props) => {
 
   return (
     <MDBCol>
-      <MDBCard className="h-100" style={{ maxWidth: "350px" }}>
+      <MDBCard className="m-5" style={{ maxWidth: "500px" }}>
         <MDBCardImage
           src={country.flags.svg}
           alt="Country flag"
@@ -76,7 +94,7 @@ const CountrySingle = (props) => {
               style={{ width: "40px", height: "40px", marginRight: "10px" }} // Smaller image size
             />
             <Button
-              variant="light"
+              variant="primary"
               onClick={() => navigate("/countries")}
               size="sm" // Smaller button
             >
@@ -85,6 +103,11 @@ const CountrySingle = (props) => {
           </div>
         </MDBCardBody>
       </MDBCard>
+
+      <div className="wiki__info__container">
+        <h3>About {country.name.common}</h3>
+        <p>{wikiText}</p>
+      </div>
     </MDBCol>
   );
 };

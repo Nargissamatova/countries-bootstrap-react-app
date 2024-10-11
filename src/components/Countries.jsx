@@ -116,20 +116,26 @@ const Countries = () => {
                       </i>
                     </ListGroup.Item>
                   </ListGroup>
-                  <Button
-                    variant="primary"
-                    onClick={() => dispatch(addFavourite(country.name.common))}
-                  >
-                    Add Favourite
-                  </Button>
-                  <Button
-                    variant="warning"
-                    onClick={() =>
-                      dispatch(removeFavourite(country.name.common))
-                    }
-                  >
-                    Remove Favourite
-                  </Button>
+                  <Row xs={2}>
+                    <Button
+                      size="sm"
+                      variant="success"
+                      onClick={() =>
+                        dispatch(addFavourite(country.name.common))
+                      }
+                    >
+                      Add Favourite
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="secondary"
+                      onClick={() =>
+                        dispatch(removeFavourite(country.name.common))
+                      }
+                    >
+                      Remove Favourite
+                    </Button>
+                  </Row>
                 </Card.Body>
               </Card>
             </Col>

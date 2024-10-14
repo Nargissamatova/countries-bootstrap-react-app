@@ -31,7 +31,7 @@
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/countryinfo.git
+https://github.com/Nargissamatova/countries-bootstrap-react-app.git
 cd countryinfo
 npm install
 npm start

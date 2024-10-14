@@ -2,6 +2,10 @@
 
 **CountryInfo** is a web application built with React and Bootstrap that allows users to explore detailed information about countries around the world. Users can sign up to create an account, save their favorite countries, and access additional information such as population, currency, languages, and real-time weather forecasts for a country’s capital city.
 
+## Screenshot
+
+![CountryInfo Screenshot](https://imgur.com/cC5JRrx.png)
+
 ## Features
 
 - **Explore Countries**: View detailed information for any country, including its population, currency, languages, and flag.

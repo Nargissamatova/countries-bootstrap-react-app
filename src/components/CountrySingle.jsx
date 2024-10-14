@@ -10,6 +10,7 @@ import {
   MDBCardText,
   MDBRow,
   MDBCol,
+  MDBTextArea,
 } from "mdb-react-ui-kit";
 
 const CountrySingle = (props) => {
@@ -52,8 +53,6 @@ const CountrySingle = (props) => {
     getWikiText();
   }, [country.capital]);
 
-  console.log("Weather: ", weather);
-
   if (isWeatherLoading) {
     return (
       <Col className="text-center m-5">
@@ -70,45 +69,49 @@ const CountrySingle = (props) => {
   }
 
   return (
-    <MDBCol>
-      <MDBCard className="m-5" style={{ maxWidth: "500px" }}>
-        <MDBCardImage
-          src={country.flags.svg}
-          alt="Country flag"
-          position="top"
-          style={{ objectFit: "cover", width: "100%", height: "100%" }} // Smaller image height
-        />
-        <MDBCardBody>
-          <MDBCardTitle style={{ fontSize: "1.2rem" }}>
-            {country.name.common}, {country.capital}
-          </MDBCardTitle>
+    <MDBRow className="d-flex align-items-center">
+      <MDBCol>
+        <MDBCard className="m-5" style={{ maxWidth: "500px" }}>
+          <MDBCardImage
+            src={country.flags.svg}
+            alt="Country flag"
+            position="top"
+            style={{ objectFit: "cover", width: "100%", height: "100%" }} // Smaller image height
+          />
+          <MDBCardBody>
+            <MDBCardTitle style={{ fontSize: "1.2rem" }}>
+              {country.name.common}, {country.capital}
+            </MDBCardTitle>
 
-          <MDBCardText style={{ fontSize: "0.9rem" }}>
-            Right now it is <strong>{parseInt(weather.main.temp)}°C</strong> in{" "}
-            {country.capital} and {weather.weather[0].description}
-          </MDBCardText>
+            <MDBCardText style={{ fontSize: "0.9rem" }}>
+              Right now it is <strong>{parseInt(weather.main.temp)}°C</strong>{" "}
+              in {country.capital} and {weather.weather[0].description}
+            </MDBCardText>
 
-          <div className="d-flex align-items-center">
-            <Image
-              src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
-              style={{ width: "40px", height: "40px", marginRight: "10px" }} // Smaller image size
-            />
-            <Button
-              variant="primary"
-              onClick={() => navigate("/countries")}
-              size="sm" // Smaller button
-            >
-              Back to Countries
-            </Button>
-          </div>
-        </MDBCardBody>
-      </MDBCard>
+            <div className="d-flex align-items-center">
+              <Image
+                src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
+                style={{ width: "40px", height: "40px", marginRight: "10px" }} // Smaller image size
+              />
+              <Button
+                variant="primary"
+                onClick={() => navigate("/countries")}
+                size="sm" // Smaller button
+              >
+                Back to Countries
+              </Button>
+            </div>
+          </MDBCardBody>
+        </MDBCard>
+      </MDBCol>
 
-      <div className="wiki__info__container">
-        <h3>About {country.name.common}</h3>
-        <p>{wikiText}</p>
-      </div>
-    </MDBCol>
+      <MDBCol>
+        <MDBCardText>
+          <h3>About {country.name.common}</h3>
+          <p>{wikiText}</p>
+        </MDBCardText>
+      </MDBCol>
+    </MDBRow>
   );
 };
 

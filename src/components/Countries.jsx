@@ -61,7 +61,7 @@ const Countries = () => {
           </Form>
         </Col>
       </Row>
-      <Row xs={2} md={3} lg={4} className="g-3">
+      <Row xs={1} sm={2} md={3} lg={4} className="g-3">
         {countries
           .filter((country) => {
             return country.name.common

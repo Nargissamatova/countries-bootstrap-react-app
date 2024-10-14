@@ -3,6 +3,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Row from "react-bootstrap/Row";
+import { FaMapMarkerAlt } from "react-icons/fa"; // Importing the icon
 import { useAuthState } from "react-firebase-hooks/auth";
 import { LinkContainer } from "react-router-bootstrap";
 import { Outlet } from "react-router-dom";
@@ -15,8 +16,9 @@ const Layout = () => {
       <Row>
         <Navbar bg="dark" variant="dark">
           <Container className="justify-content-end">
-            <Navbar.Brand href="#home">CountriesApp</Navbar.Brand>
-
+            <Navbar.Brand href="#home">
+              <FaMapMarkerAlt style={{ marginRight: "10px" }} /> CountriesInfo
+            </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse
               id="basic-navbar-nav"

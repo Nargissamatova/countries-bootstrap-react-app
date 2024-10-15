@@ -3,12 +3,6 @@ import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import CardGroup from "react-bootstrap/CardGroup";
 
-import {
-  MDBCarousel,
-  MDBCarouselItem,
-  MDBCarouselCaption,
-} from "mdb-react-ui-kit";
-
 const Home = () => {
   return (
     <>

@@ -8,7 +8,6 @@ import {
 } from "../store/favouritesSlice";
 import CountryCard from "./CountryCard";
 
-// Favourites to be written
 const Favourites = () => {
   const dispatch = useDispatch();
   let countriesList = useSelector((state) => state.countries.countries);

@@ -23,8 +23,5 @@ export const countriesSlice = createSlice({
   extraReducers() {},
 });
 
-// These are actions to be used in components later
 export const { getCountries, isLoading, search } = countriesSlice.actions;
-
-// This is the connection to store.js
 export default countriesSlice.reducer;

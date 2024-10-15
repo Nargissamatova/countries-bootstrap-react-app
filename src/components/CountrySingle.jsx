@@ -10,7 +10,6 @@ import {
   MDBCardText,
   MDBRow,
   MDBCol,
-  MDBTextArea,
 } from "mdb-react-ui-kit";
 
 const CountrySingle = (props) => {
@@ -25,7 +24,9 @@ const CountrySingle = (props) => {
   useEffect(() => {
     axios
       .get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${country.capital}&units=metric&appid=d6396cefb7fda507e8e0c956cbab71cf` //${import.meta.env.VITE_WEATHER_API_KEY}
+        `https://api.openweathermap.org/data/2.5/weather?q=${
+          country.capital
+        }&units=metric&appid=${import.meta.env.VITE_WEATHER_API_KEY}` // or enter api key
       )
       .catch((error) => {
         console.log(error);
@@ -76,7 +77,7 @@ const CountrySingle = (props) => {
             src={country.flags.svg}
             alt="Country flag"
             position="top"
-            style={{ objectFit: "cover", width: "100%", height: "100%" }} // Smaller image height
+            style={{ objectFit: "cover", width: "100%", height: "100%" }}
           />
           <MDBCardBody>
             <MDBCardTitle style={{ fontSize: "1.2rem" }}>
@@ -91,12 +92,12 @@ const CountrySingle = (props) => {
             <div className="d-flex align-items-center">
               <Image
                 src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
-                style={{ width: "40px", height: "40px", marginRight: "10px" }} // Smaller image size
+                style={{ width: "40px", height: "40px", marginRight: "10px" }}
               />
               <Button
                 variant="primary"
                 onClick={() => navigate("/countries")}
-                size="sm" // Smaller button
+                size="sm"
               >
                 Back to Countries
               </Button>

@@ -1,5 +1,6 @@
 import { useAuthState } from "react-firebase-hooks/auth";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import { auth } from "./auth/firebase";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import Countries from "./components/Countries";

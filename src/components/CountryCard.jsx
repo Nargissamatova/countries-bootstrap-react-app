@@ -36,23 +36,21 @@ const CountryCard = ({ country }) => {
               className="flex-grow-1 justify-content-center"
             >
               <ListGroup.Item>
-                <i className="bi bi-people me-2">
-                  {country.population.toLocaleString()}
-                </i>
+                <i className="bi bi-people me-2"> </i>
+
+                {country.population.toLocaleString()}
               </ListGroup.Item>
               <ListGroup.Item>
-                <i className="me-2">
-                  {Object.values(country.currencies || {})
-                    .map((currency) => currency.name)
-                    .join(", ") || "No currency"}
-                </i>
+                <i className="bi-currency-dollar me-2"></i>
+                {Object.values(country.currencies || {})
+                  .map((currency) => currency.name)
+                  .join(", ") || "No currency"}
               </ListGroup.Item>
               <ListGroup.Item>
-                <i className="me-2">
-                  {Object.values(country.languages || {})
-                    .map((language) => language)
-                    .join(", ") || "No currency"}
-                </i>
+                <i className="bi-translate me-2"></i>
+                {Object.values(country.languages || {})
+                  .map((language) => language)
+                  .join(", ") || "No currency"}
               </ListGroup.Item>
             </ListGroup>
             <Row xs={2}>

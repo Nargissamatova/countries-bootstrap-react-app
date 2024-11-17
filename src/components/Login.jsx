@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { auth, loginWithEmailAndPassword } from "../auth/firebase";
@@ -14,19 +14,46 @@ import {
   MDBIcon,
   MDBCheckbox,
 } from "mdb-react-ui-kit";
+import Alert from "@mui/material/Alert";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showAlert, setShowAlert] = useState(false); // Manage alert display
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
 
   const handleLogin = () => {
+    if (!email || !password) {
+      alert("Enter both email and password");
+      return;
+    }
     loginWithEmailAndPassword(email, password);
   };
 
+  // Handle navigation and alert display when user logs in
+  useEffect(() => {
+    if (user) {
+      setShowAlert(true); // Show alert
+      const timer = setTimeout(() => {
+        setShowAlert(false); // Hide alert after 2 seconds
+        navigate("/countries"); // Navigate to '/countries'
+      }, 2000);
+
+      return () => clearTimeout(timer); // Cleanup timeout on unmount
+    }
+  }, [user, navigate]);
+
   return (
     <MDBContainer fluid>
+      <div>
+        {showAlert && (
+          <Alert variant="filled" severity="success">
+            Welcome back, {user?.email}! You have logged in successfully.
+          </Alert>
+        )}
+      </div>
+
       <MDBRow className="d-flex justify-content-center align-items-center h-100">
         <MDBCol col="12">
           <MDBCard
